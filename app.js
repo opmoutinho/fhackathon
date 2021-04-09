@@ -1,5 +1,5 @@
 // Heroku server requires environment variable "process.env.PORT" to run on their server
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // imports && dependencies
 const express = require('express');
