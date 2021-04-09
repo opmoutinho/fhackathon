@@ -168,6 +168,11 @@ th:last-child, td:last-child {
 
 /*   M Y   R E Q U E S T    */
 
+.myRequest {
+    margin-top: 40px;
+}
+
 .myRequest .openRequestProperty {
     margin: 20px 0;
 }
+

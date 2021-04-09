@@ -74,3 +74,16 @@ $('#openRequestAcceptButton').click( event => {
         }
     });
 })
+
+function loadMissionInExecution(event) {
+
+    alert("foo bar");
+
+    if ($('#profileMissionToExecute').val().length == 0)  {
+        alert("You have not accepted any mission yet");
+        return;
+    }
+
+    $('#requestInExecution').attr('hidden', false);
+
+};

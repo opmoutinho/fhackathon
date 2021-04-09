@@ -88,11 +88,11 @@ $('#newRequestSubmit').click( event => {
             // clears all rows from table except first
             $('#forumTable').find("tr:gt(0)").remove();
             populateForum();
-
+            $('#profileMissionRequest').val(response.missionRequest);
             $('#checkMyRequestButton').attr('hidden', false);
             $('#newRequestForm').attr('hidden', true);
-            $('#profileCreateRequestButton').attr('hidden', true);
             $('#profileEditButton').attr('hidden', false);
+            $('#profileCreateRequestButton').attr('hidden', true);
         }
     });
 });
@@ -132,3 +132,32 @@ $('#profileCheckMyRequestButton').click( event => {
 
 });
 
+$('#myRequestIgnoreButton').click( event => {
+
+    $('#myRequest').attr('hidden', true);
+
+});
+
+
+$('#myRequestFinishButton').click( event => {
+
+    if ($('#myRequestAcceptedBy').val().length == 0) {
+
+        $.ajax({
+            url: baseURL + 'quim/' + $('#profileId').val() + '/executeMission/-1',
+            type: 'POST',
+            success: response => {
+                $('#profileMissionRequest').val("");
+                $('#myRequest').attr('hidden', true);
+                alert("You have successfully ended you open request");
+            }
+        })
+
+    } else {
+
+
+
+
+    }
+
+});
