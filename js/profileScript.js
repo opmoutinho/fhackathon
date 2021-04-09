@@ -9,7 +9,7 @@ $(document).ready( () => {
 function populateProfile() {
 
     $.ajax({
-        url: baseURL + "quim/" + "3", 
+        url: baseURL + "quim/" + "1", 
 
         error: response => {
             console.log("ERROR: ", response);
