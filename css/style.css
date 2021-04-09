@@ -1,14 +1,10 @@
 * {
-    /* outline: 1px solid magenta;     */
+    /* outline: 1px solid magenta; */
 }
 
 html {
     font-size: 16px;
 }
-
-
-/*   N A V   */
-
 
 
 
@@ -55,6 +51,10 @@ html {
     resize: none;
 }
 
+.profile .executeButton {
+    width: 100%;
+}
+
 
 /*   F O R U M   */
 
@@ -99,9 +99,6 @@ th:last-child, td:last-child {
     background-color: rgb(42, 48, 48);
 }
 
-.forum td {
-    outline: 1px solid magenta;
-}
 
 
 
@@ -139,7 +136,11 @@ th:last-child, td:last-child {
 }
 
 .requests .newRequest .requestButton {
-    margin: 30px 30px;
+    margin: 30px 10px;
+}
+
+.requests .newRequest .form-group {
+    margin: 20px 0;
 }
 
 
@@ -161,5 +162,12 @@ th:last-child, td:last-child {
 }
 
 .requests .acceptButton {
+    margin: 20px 0;
+}
+
+
+/*   M Y   R E Q U E S T    */
+
+.myRequest .openRequestProperty {
     margin: 20px 0;
 }

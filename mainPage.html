@@ -13,6 +13,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
         <script src="js/profileScript.js" defer></script>
         <script src="js/forumScript.js" defer></script>
+        <script src="js/openRequestScript.js" defer></script>
+        <script src="js/newRequestScript.js" defer></script>
         <title>Helperz</title>
 
     </head>
@@ -24,29 +26,35 @@
             <div class="profile">
 
                 <input type="text" id="profileId" disabled hidden>
+                <p>mission request</p>
+                <input type="text" id="profileMissionRequest" disabled>
 
                 <div class="profileProperty">
                     <img src="resources/unknownpic.png" class="profilepic"/>
                 </div>
                 <div class="profileProperty">
                     <label for="profileName" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="profileName" placeholder="Peter Barros" disabled>
+                    <input type="text" class="form-control" id="profileName" placeholder="" disabled>
                 </div>
                 <div class="profileProperty">
                     <label for="profileEmail" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="profileEmail" placeholder="peterbaros@yahoo.com" disabled>
+                    <input type="text" class="form-control" id="profileEmail" placeholder="" disabled>
                 </div>
                 <div class="profileProperty">
                     <label for="profilePhone" class="form-label">Phone</label>
-                    <input type="text" class="form-control" id="profilePhone" placeholder="35196575744" disabled>
+                    <input type="text" class="form-control" id="profilePhone" placeholder="" disabled>
                 </div>
                 <div class="profileProperty">
                     <label for="profileLocation" class="form-label">Location</label>
-                    <input type="text" class="form-control" id="profileLocation" placeholder="Lisbon" disabled>
+                    <input type="text" class="form-control" id="profileLocation" placeholder="" disabled>
                 </div>
                 <div class="profileProperty">
                     <label for="profileAboutMe" class="form-label">About Me</label>
-                    <textarea class="form-control" id="profileAboutMe" rows="10" disabled>gdfdfgdfgd df df gdfgdfgdfg dfgdfgdg</textarea>
+                    <textarea class="form-control" id="profileAboutMe" rows="5" disabled></textarea>
+                </div>
+                <div class="profileProperty">
+                    <button class="btn btn-light executeButton" id="profileCheckMissionExecuteButton">Mission to Execute</button>
+                    <input type="text" class="form-control" id="profileMissionToExecute" placeholder="" disabled>
                 </div>
                 <table class="table pointsRatingTable">
                     <tr>
@@ -60,6 +68,7 @@
                 </table>
 
                 <button class="btn btn-light" id="profileCreateRequestButton">Create Request</button>
+                <button class="btn btn-light" id="profileCheckMyRequestButton">My Request</button>
                 <button class="btn btn-light" id="profileEditButton">Edit Info</button>
                 <button class="btn btn-light" id="profileCancelEditButton" hidden>Cancel Edit</button>
                 <button class="btn btn-light" id="profileConfirmEditButton" hidden>Confirm Edit</button>
@@ -74,18 +83,6 @@
                         <th>Location</th>
                         <th>Check</th>
                     </tr>
-                    <tr>
-                        <td>sdfds</td>
-                        <td>sdf</td>
-                        <td>sdf</td>
-                        <td>button</td>
-                    </tr>
-                    <tr>
-                        <td>sdfds</td>
-                        <td>sdf</td>
-                        <td>sdf</td>
-                        <td><button class="btn btn-light"></button>></td>
-                    </tr>
                 </table>
 
             </div>
@@ -99,11 +96,8 @@
                     <form action="">
 
                         <div class="form-group">
-                            <button class="btn btn-outline-secondary dropdown-toggle roleOptions" type="radio" data-bs-toggle="dropdown" aria-expanded="true">Role</button>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-item" type="radio" name="roleOptions">Actions</li>
-                                <li class="dropdown-item" type="radio" name="roleOptions">Action1</li>
-                                <li class="dropdown-item" type="radio" name="roleOptions">Action2</li>
+                            <button class="btn btn-outline-secondary dropdown-toggle roleOptions" type="radio" data-bs-toggle="dropdown" aria-expanded="true">Skill</button>
+                            <ul class="dropdown-menu" id="skillsDropdownMenu">
                             </ul>
                         </div>
 
@@ -112,8 +106,13 @@
                             <textarea class="form-control textArea" id="requestDecription" rows="15" message="Describe your request..."></textarea>
                         </div>
 
+                        <div class="form-group">
+                            <label for="requestSkill">Skill</label>
+                            <input class="form-control" id="requestSkill" disabled></input>
+                        </div>
+
                         <button type="button" class="btn btn-light requestButton" id="newRequestCancel">Cancel</button>
-                        <button type="submit" class="btn btn-light requestButton" id="newRequestSubmit">Submit</button>
+                        <button type="button" class="btn btn-light requestButton" id="newRequestSubmit">Submit</button>
 
                     </form>
 
@@ -125,32 +124,69 @@
                     </div>
                     <div class="openRequestProperty">
                         <label for="requesterName" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="requesterName" placeholder="manelita" disabled>
+                        <input type="text" class="form-control" id="requesterName" placeholder="" disabled>
                     </div>
                     <div class="openRequestProperty">
                         <label for="requesterEmail" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="requesterEmail" placeholder="manelita@gmail.com" disabled>
+                        <input type="text" class="form-control" id="requesterEmail" placeholder="" disabled>
                     </div>
                     <div class="openRequestProperty">
                         <label for="requesterPhone" class="form-label">Phone</label>
-                        <input type="text" class="form-control" id="requesterPhone" placeholder="3674847644" disabled>
+                        <input type="text" class="form-control" id="requesterPhone" placeholder="" disabled>
                     </div>
                     <div class="openRequestProperty">
                         <label for="requesterLocation" class="form-label">Location</label>
-                        <input type="text" class="form-control" id="requesterLocation" placeholder="lisboa" disabled>
+                        <input type="text" class="form-control" id="requesterLocation" placeholder="" disabled>
                     </div>
 
                     <div class="openRequestProperty">
                         <label for="requesterAboutMe" class="form-label">About Me</label>
-                        <textarea class="form-control" id="requesterAboutMe" rows="5" disabled>gfdgdf fd dfg dfg dfg dfgdfgd d</textarea>
+                        <textarea class="form-control" id="requesterAboutMe" rows="5" disabled></textarea>
                     </div>
 
                     <div class="openRequestProperty">
                         <label for="requesterAboutMe" class="form-label">Request</label>
-                        <textarea class="form-control" id="requesterRequest" rows="5" disabled>gfdgdf fd dfg dfg dfg dfgdfgd d</textarea>
+                        <textarea class="form-control" id="requesterRequest" rows="5" disabled></textarea>
                     </div>
 
-                    <button class="btn btn-light acceptButton">Accept</button>
+                    <input type="text" id="missionId" disabled hidden>
+
+                    <button class="btn btn-light ignoreButton" id="openRequestIgnoreButton">Ignore</button>
+                    <button class="btn btn-light acceptButton" id="openRequestAcceptButton">Accept</button>
+                </div>
+
+
+
+                <div class="myRequest" id="myRequest" hidden>
+                    <div class="openRequestProperty">
+                        <label for="myRequestDescription" class="form-label">Request</label>
+                        <textarea type="text" class="form-control" id="myRequestDescription" rows="5" disabled></textarea>
+                    </div>
+
+                    <div class="openRequestProperty">
+                        <label for="myRequestAcceptedBy" class="form-label">Accepted by QUIM</label>
+                        <input type="text" class="form-control" id="myRequestAcceptedBy" disabled></input>
+                    </div>
+
+                    <div class="openRequestProperty">
+                        <label for="myRequestQuimContact" class="form-label">QUIM contact</label>
+                        <input type="text" class="form-control" id="myRequestQuimContact" disabled></input>
+                    </div>
+
+                    <did class="openRequestProperty">
+                        <div class="btn-group me-2" role="group" aria-label="Second group">
+                            <button type="radio" class="btn btn-secondary" id="rating-1">1</button>
+                            <button type="radio" class="btn btn-secondary" id="rating-2">2</button>
+                            <button type="radio" class="btn btn-secondary" id="rating-3">3</button>
+                            <button type="radio" class="btn btn-secondary" id="rating-4">4</button>
+                            <button type="radio" class="btn btn-secondary" id="rating-5">5</button>
+                        </div>
+                    </did>
+
+                    <div class="openRequestProperty">
+                        <button class="btn btn-light ignoreButton" id="myRequestIgnoreButton">Ignore</button>
+                        <button class="btn btn-light closeButton" id="myRequestFinishButton">Finish</button>
+                    </did>
                 </div>
 
             </div>

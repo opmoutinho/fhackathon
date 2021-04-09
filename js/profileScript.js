@@ -8,7 +8,14 @@ $(document).ready( () => {
 
 function populateProfile() {
 
-    $.ajax({url: baseURL + "quim/" + "2", success: (response) => {
+    $.ajax({
+        url: baseURL + "quim/" + "3", 
+
+        error: response => {
+            console.log("ERROR: ", response);
+        },
+
+        success: (response) => {
 
             $('#profileId').val(response.id);
             $('#profileName').val(response.name);
@@ -18,6 +25,14 @@ function populateProfile() {
             $('#profileAboutMe').val(response.aboutMe);
             $('#profilePoints').val(response.points);
             $('#profileRating').val(response.rating);
+            $('#profileMissionRequest').val(response.missionRequest);
+            $('#profileMissionToExecuteButton').val(response.missionToExecute);
+
+            if ($('#profileMissionRequest').val() > 0) {
+                $('#profileCreateRequestButton').attr('hidden', true);
+            } else {
+                $('#profileCheckMyRequestButton').attr('hidden', true);
+            }
             
             $('#profileCreateRequestButton').click( event => {
                 showNewResquestForm(event);                    
@@ -34,6 +49,7 @@ function populateProfile() {
             $('#profileConfirmEditButton').click( event => {
                 confirmEditProfile(event);
             });
+
         }
     });
 }
@@ -47,37 +63,7 @@ function disableEditProfile() {
     $('#profileAboutMe').attr('disabled', true);
 }
 
-function showNewResquestForm(event) {
 
-    $('#newRequestForm').attr('hidden', false);
-    $('#profileEditButton').attr('hidden', true);
-    $('#profileCreateRequestButton').attr('hidden', true);
-
-    $.ajax({
-        url: baseURL + "skills", 
-
-        error: response => {
-            console.log("ERROR: ", result);
-        },
-    
-        success: response => {
-
-            response.forEach(skill => {
-
-                var skill = $("<li></li>").text(skill);
-                skill.attr('type', 'radio');
-                skill.attr('name', 'roleOptions');
-                skill.class('dropdown-item');
-                $('#skillsDropdownMenu').append(skill);
-    
-                viewMissionButton.click( event => {
-                    
-                });
-    
-            });
-        }
-    });
-}
 
 function editProfile(event) {
 
@@ -122,11 +108,11 @@ function confirmEditProfile(event) {
         data: JSON.stringify(quim),
         async: true,
         contentType: 'application/json',
-        error: result => {
-            console.log("ERROR: ", result);
+        error: response => {
+            console.log("ERROR: ", response);
         },
-        success: result => {
-            console.log(result);
+        success: response => {
+            console.log(response);
             // clears all rows from table except first
             $('#forumTable').find("tr:gt(0)").remove();
             populateForum();

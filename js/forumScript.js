@@ -20,40 +20,17 @@ function populateForum() {
                 var viewMissionButton = $("<button></button>").text('View')
                                                             .addClass('btn btn-dark viewButton')
                                                             .attr('data', mission.id)
-                                                            .attr('id', 'viewRequest' + mission.id);
+                                                            .attr('id', 'viewRequest-' + mission.id);
                 var viewMissionCell = $("<td></td>").append(viewMissionButton);
 
                 var row = $("<tr></tr>").append(date, skill, location, viewMissionCell).attr('data', mission.id);
 
                 viewMissionButton.click( event => {
-                    loadRequestInfo();
+                    loadRequestInfo(event);
                 });
 
                 $('#forumTable').append(row);
             })
         }
     })
-}
-
-$('#newRequestCancel').click( event => {
-
-    $('#newRequestForm').attr('hidden', true);
-    $('#profileCreateRequestButton').attr('hidden', false);
-    $('#profileEditButton').attr('hidden', false);
-
-});
-
-$('#newRequestSubmit').click( event => {
-
-    $('#newRequestForm').attr('hidden', true);
-    $('#profileCreateRequestButton').attr('hidden', false);
-    $('#profileEditButton').attr('hidden', false);
-
-});
-
-
-function loadRequestInfo() {
-
-    $('#openRequest').attr('hidden', false);
-
 }
