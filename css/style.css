@@ -95,6 +95,14 @@ th:last-child, td:last-child {
     border-top-right-radius: 10px; 
 }
 
+.forum .btn-dark {
+    background-color: rgb(42, 48, 48);
+}
+
+.forum td {
+    outline: 1px solid magenta;
+}
+
 
 
 
@@ -130,7 +138,7 @@ th:last-child, td:last-child {
     resize: none;
 }
 
-.requests .newRequest .submitRequest {
+.requests .newRequest .requestButton {
     margin: 30px 30px;
 }
 

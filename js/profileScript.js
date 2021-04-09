@@ -8,7 +8,7 @@ $(document).ready( () => {
 
 function populateProfile() {
 
-    $.ajax({url: baseURL + "quim/" + "1", success: (response) => {
+    $.ajax({url: baseURL + "quim/" + "2", success: (response) => {
 
             $('#profileId').val(response.id);
             $('#profileName').val(response.name);
@@ -53,14 +53,30 @@ function showNewResquestForm(event) {
     $('#profileEditButton').attr('hidden', true);
     $('#profileCreateRequestButton').attr('hidden', true);
 
-    $.ajax({url: baseURL + "skills", success: (response) => {
+    $.ajax({
+        url: baseURL + "skills", 
 
-        /* response.forEach() {
+        error: response => {
+            console.log("ERROR: ", result);
+        },
+    
+        success: response => {
 
-        } */
-    }
-});
+            response.forEach(skill => {
 
+                var skill = $("<li></li>").text(skill);
+                skill.attr('type', 'radio');
+                skill.attr('name', 'roleOptions');
+                skill.class('dropdown-item');
+                $('#skillsDropdownMenu').append(skill);
+    
+                viewMissionButton.click( event => {
+                    
+                });
+    
+            });
+        }
+    });
 }
 
 function editProfile(event) {
@@ -101,7 +117,7 @@ function confirmEditProfile(event) {
     }
 
     $.ajax({
-        url: baseURL + $('#idInput').val(),
+        url: baseURL + "quim/" + $('#profileId').val(),
         type: 'PUT',
         data: JSON.stringify(quim),
         async: true,
@@ -115,37 +131,10 @@ function confirmEditProfile(event) {
             $('#forumTable').find("tr:gt(0)").remove();
             populateForum();
             disableEditProfile();
+            $('#profileCreateRequestButton').attr('hidden', false);
+            $('#profileEditButton').attr('hidden', false);
+            $('#profileCancelEditButton').attr('hidden', true);
+            $('#profileConfirmEditButton').attr('hidden', true);
         }
     });
-}
-
-
-function populateForum() {
-
-    $.ajax({
-        url: baseURL + "missions", 
-
-        error: response => {
-            console.log("ERROR: ", result);
-        },
-
-        success: (response) => {
-
-        response.forEach(mission => {
-
-            console.log(misson.location)
-            var date = $("<td></td>").text(mission.date);
-            var role = $("<td></td>").text(mission.role);
-            var location = $("<td></td>").text(mission.location);
-    
-            var viewMissionButton = $("<button></button>").text('View').addClass('btn btn-light').attr('data', mission.id);
-            var viewMissionCell = $("<td></td>").append(viewMissionButton);
-
-            var row = $("<tr></tr>").append(date, role, location, viewMissionCell).attr('data', mission.id);
-    
-            $('#forumTable').append(row);
-
-        });
-    }});
-
 }
