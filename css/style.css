@@ -1,0 +1,157 @@
+* {
+    /* outline: 1px solid magenta;     */
+}
+
+html {
+    font-size: 16px;
+}
+
+
+/*   N A V   */
+
+
+
+
+/*   M A I N   */
+
+.main {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+
+/*   P R O F I L E   */
+
+.profile {
+    background-color: #379683;
+    width: 20%;
+    text-align: center;
+    color: #EDF5E1;
+    overflow-wrap: break-word;
+    padding: 20px;
+}
+
+.profile .profilepic {
+    width: 40%;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+.profile .profileProperty {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.profile input {
+    text-align: center;
+}
+
+.profile .pointsRatingTable {
+    color: #EDF5E1;
+}
+
+.profile textarea {
+    resize: none;
+}
+
+
+/*   F O R U M   */
+
+.forum {
+    background-color: rgb(46, 46, 46);
+    width: 60%;
+    color: #EDF5E1;
+    text-align: center;
+}
+
+.forum .table {
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+    color: #EDF5E1;
+    border-bottom: hidden;
+    border-collapse: separate;
+    border-spacing:0 20px;
+}
+
+.forum tr {
+    background-color: beige;
+    color: rgb(74, 74, 74);
+}
+
+.forum .forumHeader {
+    background-color: grey;
+}
+
+th:first-child, td:first-child {
+    border-left-style: solid;
+    border-top-left-radius: 10px; 
+    border-bottom-left-radius: 10px;
+}
+th:last-child, td:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 10px; 
+    border-top-right-radius: 10px; 
+}
+
+
+
+
+
+
+
+/*   R E Q U E S T   A R E A   */
+
+.requests {
+    background-color: #379683;
+    width: 20%;
+    color: #EDF5E1;
+    text-align: center;
+    padding: 20px;
+}
+
+
+
+/*   N E W   R E Q U E S T    */
+
+.requests .newRequest h4 {
+    margin: 20px 0;
+}
+
+.requests .newRequest .roleOptions {
+    background-color: beige;
+    color: grey;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.requests textArea {
+    resize: none;
+}
+
+.requests .newRequest .submitRequest {
+    margin: 30px 30px;
+}
+
+
+
+/*   O P E N   R E Q U E S T   */
+
+.requests .requesterPic {
+    width: 40%;
+    border-radius: 50%;
+    margin: 1rem;
+}
+
+.requests .openRequestProperty input {
+    text-align: center;
+}
+
+.requests .openRequestProperty {
+    margin: 5px 0;
+}
+
+.requests .acceptButton {
+    margin: 20px 0;
+}
