@@ -1,4 +1,4 @@
-const baseURL = "http://helperz.herokuapp.com/api/"
+const baseURL = "https://helperz.herokuapp.com/api/"
 
 $(document).ready( () => {
     populateProfile();
