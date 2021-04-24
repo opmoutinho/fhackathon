@@ -26,8 +26,11 @@
             <div class="profile">
 
                 <input type="text" id="profileId" disabled hidden>
-                <p>mission request</p>
-                <input type="text" id="profileMissionRequest" disabled>
+
+                <div class="profileProperty" hidden>
+                    <p>mission request</p>
+                    <input type="text" id="profileMissionRequest" disabled>
+                </div>
 
                 <div class="profileProperty">
                     <img src="resources/unknownpic.png" class="profilepic"/>
@@ -53,8 +56,8 @@
                     <textarea class="form-control" id="profileAboutMe" rows="5" disabled></textarea>
                 </div>
                 <div class="profileProperty">
-                    <button class="btn btn-light executeButton" id="profileCheckMissionExecuteButton">Mission to Execute</button>
-                    <input type="text" class="form-control" id="profileMissionToExecute" placeholder="" disabled>
+                    <button class="btn btn-light executeButton" id="profileCheckMissionExecuteButton" hidden>I have a Mission!</button>
+                    <input type="text" class="form-control" id="profileMissionToExecute" placeholder="" disabled hidden>
                 </div>
                 <table class="table pointsRatingTable">
                     <tr>
@@ -69,7 +72,7 @@
 
                 <button class="btn btn-light" id="profileCreateRequestButton">Create Request</button>
                 <button class="btn btn-light" id="profileCheckMyRequestButton">My Request</button>
-                <button class="btn btn-light" id="profileEditButton">Edit Info</button>
+                <button class="btn btn-light" id="profileEditButton">Edit Profile</button>
                 <button class="btn btn-light" id="profileCancelEditButton" hidden>Cancel Edit</button>
                 <button class="btn btn-light" id="profileConfirmEditButton" hidden>Confirm Edit</button>
             </div>
@@ -176,7 +179,12 @@
                         <input type="text" class="form-control" id="myRequestQuimContact" disabled></input>
                     </div>
 
-                    <did class="openRequestProperty">
+                    <div class="openRequestProperty" hidden>
+                        <label for="myRequestQuimId" class="form-label">QUIM ID</label>
+                        <input type="text" class="form-control" id="myRequestQuimId" disabled></input>
+                    </div>
+
+                    <div class="openRequestProperty">
                         <p>Rate QUIM</p>
                         <div class="btn-group me-2" role="group" aria-label="Second group">
                             <button type="radio" class="btn btn-secondary ratingRadio" id="rating-1">1</button>
@@ -184,23 +192,23 @@
                             <button type="radio" class="btn btn-secondary ratingRadio" id="rating-3">3</button>
                             <button type="radio" class="btn btn-secondary ratingRadio" id="rating-4">4</button>
                             <button type="radio" class="btn btn-secondary ratingRadio" id="rating-5">5</button>
+                            <input type="text" class="form-control" id="ratingNumber" value="0" size="2" disabled></input>
                         </div>
-                    </did>
+                    </div>
 
                     <div class="openRequestProperty">
                         <button class="btn btn-light ignoreButton" id="myRequestIgnoreButton">Ignore</button>
                         <button class="btn btn-light closeButton" id="myRequestFinishButton">Finish</button>
-                    </did>
+                    </div>
                 </div>
-
 
                 <div class="requestInExecution" id="requestInExecution" hidden>
 
                     <h4>You accepted this Mission</h4>
 
                     <div class="openRequestProperty">
-                        <label for="myRequestDescription" class="form-label">Request by</label>
-                        <textarea type="text" class="form-control" id="myRequestDescription" disabled></textarea>
+                        <label for="inExecutionRequesterName" class="form-label">Request by</label>
+                        <input type="text" class="form-control" id="inExecutionRequesterName" disabled></input>
                     </div>
 
                     <div class="openRequestProperty">
@@ -209,8 +217,8 @@
                     </div>
 
                     <div class="openRequestProperty">
-                        <label for="requesterContact" class="form-label">Contact</label>
-                        <input type="text" class="form-control" id="requesterContact" disabled></input>
+                        <label for="inExecutionRequesterContact" class="form-label">Contact</label>
+                        <input type="text" class="form-control" id="inExecutionRequesterContact" disabled></input>
                     </div>
 
                     <h5>You cannot cancel this mission, only the requester can...</h5>

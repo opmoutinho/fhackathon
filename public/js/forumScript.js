@@ -1,5 +1,8 @@
 function populateForum() {
 
+    // delete all rows except header
+    $("#forumTable").find("tr:gt(0)").remove();
+
     $.ajax({
         url: baseURL + "missions", 
 
@@ -10,8 +13,6 @@ function populateForum() {
         success: response => {
 
             response.forEach(mission => {
-
-                console.log(response);
 
                 var date = $("<td></td>").text(mission.date);
                 var skill = $("<td></td>").text(mission.skill);

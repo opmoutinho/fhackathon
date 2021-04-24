@@ -1,15 +1,25 @@
-const baseURL = "https://helperz.herokuapp.com/api/"
-
-var loginUser;
+const baseURL = "https://helperz.herokuapp.com/api/";
 
 $(document).ready( () => {
-    loginUser = Math.floor(Math.random() * 7)
-    populateProfile();
+
+    $.ajax({
+        url: baseURL + "quim/",
+        error: response => {
+            console.log("ERROR: ", response);
+        },
+        success: (response) => {
+            let arrOfUsersIds = [];
+            for (user of response) { arrOfUsersIds.push(user.id); }
+            let loginUser = Math.floor(Math.random() * 7) + Math.min(...arrOfUsersIds);
+            populateProfile(loginUser);
+        }
+    });
+
     populateForum();
 });
 
 
-function populateProfile() {
+function populateProfile(loginUser) {
 
     $.ajax({
         url: baseURL + "quim/" + loginUser,
@@ -26,15 +36,23 @@ function populateProfile() {
             $('#profilePhone').val(response.phone);
             $('#profileLocation').val(response.location);
             $('#profileAboutMe').val(response.aboutMe);
-            $('#profilePoints').val(response.points);
+            $('#profilePoints').text(response.points);
             $('#profileRating').val(response.rating);
             $('#profileMissionRequest').val(response.missionRequest);
             $('#profileMissionToExecute').val(response.missionToExecute);
 
             if ($('#profileMissionRequest').val() > 0) {
                 $('#profileCreateRequestButton').attr('hidden', true);
+                $('#profileCheckMyRequestButton').attr('hidden', false);
             } else {
                 $('#profileCheckMyRequestButton').attr('hidden', true);
+                $('#profileCreateRequestButton').attr('hidden', false);
+            }
+
+            if ($('#profileMissionToExecute').val() > 0) {
+                $('#profileCheckMissionExecuteButton').attr('hidden', false);
+            } else {
+                $('#profileCheckMissionExecuteButton').attr('hidden', true);
             }
             
             $('#profileCreateRequestButton').click( event => {
@@ -56,7 +74,6 @@ function populateProfile() {
             $('#profileCheckMissionExecuteButton').click( event => {
                 loadMissionInExecution(event);
             });
-
         }
     });
 }
@@ -95,6 +112,7 @@ function cancelEditProfile(event) {
     $('#profileEditButton').attr('hidden', false);
     $('#profileCancelEditButton').attr('hidden', true);
     $('#profileConfirmEditButton').attr('hidden', true);
+    $('#profileCheckMyRequestButton').attr('hidden', false);
 
     disableEditProfile();
 }
@@ -134,7 +152,6 @@ function confirmEditProfile(event) {
             } else {
                 $('#profileCreateRequestButton').attr('hidden', false);
             }
-
         }
     });
 }

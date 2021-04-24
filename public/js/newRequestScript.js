@@ -5,7 +5,7 @@ function showNewResquestForm(event) {
     $('#newRequestForm').attr('hidden', false);
     $('#profileEditButton').attr('hidden', true);
     $('#profileCreateRequestButton').attr('hidden', true);
-
+    $('#requestInExecution').attr('hidden', true);
 
     $.ajax({
         url: baseURL + "skills", 
@@ -49,7 +49,6 @@ $('#newRequestCancel').click( event => {
 function loadSkill(event) {
 
     $('#requestSkill').val(event.target.firstChild.data);
-
 }
 
 $('#newRequestSubmit').click( event => {
@@ -85,14 +84,10 @@ $('#newRequestSubmit').click( event => {
             console.log("ERROR: ", response);
         },
         success: response => {
-            // clears all rows from table except first
-            $('#forumTable').find("tr:gt(0)").remove();
             populateForum();
-            $('#profileMissionRequest').val(response.missionRequest);
-            $('#checkMyRequestButton').attr('hidden', false);
+            populateProfile($('#profileId').val());
             $('#newRequestForm').attr('hidden', true);
             $('#profileEditButton').attr('hidden', false);
-            $('#profileCreateRequestButton').attr('hidden', true);
         }
     });
 });
@@ -120,6 +115,7 @@ $('#profileCheckMyRequestButton').click( event => {
                     success: (response) => {
                         $('#myRequestAcceptedBy').val(response.name);
                         $('#myRequestQuimContact').val(response.phone);
+                        $('#myRequestQuimId').val(response.id);
                     }
                 });
             } 
@@ -128,6 +124,7 @@ $('#profileCheckMyRequestButton').click( event => {
 
     $('#openRequest').attr('hidden', true);
     $('#newRequestForm').attr('hidden', true);
+    $('#requestInExecution').attr('hidden', true);
     $('#myRequest').attr('hidden', false);
 
 });
@@ -149,15 +146,42 @@ $('#myRequestFinishButton').click( event => {
             success: response => {
                 $('#profileMissionRequest').val("");
                 $('#myRequest').attr('hidden', true);
-                alert("You have successfully ended you open request");
+                $('#profileCreateRequestButton').attr('hidden', false);
+                $('#profileCheckMyRequestButton').attr('hidden', true);
+                alert("You have successfully ended your open request");
             }
         })
 
-    } else {
+    } 
 
+    // if mission has been accepted by anyone
+    else {
 
+        let ratingNumber = $('#ratingNumber').val();
+        if (ratingNumber == 0) {
+            alert("You must provide a rating");
+            return
+        }
 
-
+        $.ajax({
+            url: baseURL + 'quim/' + $('#profileId').val() + '/executeMission/' + ratingNumber,
+            type: 'POST',
+            error: response => {
+                console.log("ERROR", response);
+            },
+            success: response => {
+                alert("entered success");
+                $('#profileMissionRequest').val("");
+                $('#myRequest').attr('hidden', true);
+                $('#profileCreateRequestButton').attr('hidden', false);
+                $('#profileCheckMyRequestButton').attr('hidden', true);
+                alert("You have successfully ended your request and rated your helper at a " + ratingNumber);
+            }
+        })
     }
 
+});
+
+$('.ratingRadio').click( event => {
+    $('#ratingNumber').val(event.target.firstChild.data);
 });

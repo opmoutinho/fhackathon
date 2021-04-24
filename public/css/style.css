@@ -176,3 +176,16 @@ th:last-child, td:last-child {
     margin: 20px 0;
 }
 
+
+
+
+/*   R E Q U E S T   I N   E X E C U T I O N */
+
+.requests .requestInExecution h4{
+    margin: 30px 0;
+}
+
+.requests .requestInExecution h5 {
+    margin-top: 20px;
+}
+

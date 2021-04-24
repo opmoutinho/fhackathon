@@ -3,7 +3,8 @@ function loadRequestInfo(event) {
     $('#openRequest').attr('hidden', true);
     $('#newRequestForm').attr('hidden', true);
     $('#myRequest').attr('hidden', true);
-
+    $('#requestInExecution').attr('hidden', true);
+    
     var missionId = event.target.attributes[1].value;
     $('#missionId').val(missionId);
     
@@ -38,7 +39,6 @@ function loadRequestInfo(event) {
         }
     });
 
-
     $('#openRequest').attr('hidden', false);
 
 }
@@ -67,23 +67,44 @@ $('#openRequestAcceptButton').click( event => {
         },
 
         success: (response) => {
-
-            $('#profileMissionToExecute').val($('#missionId').val());
             alert("You have successfully accepted a mission. Go QUIM!!");
             $('#openRequest').attr('hidden', true);
+            populateForum();
+            populateProfile($('#profileId').val());
         }
     });
 })
 
 function loadMissionInExecution(event) {
 
-    alert("foo bar");
-
     if ($('#profileMissionToExecute').val().length == 0)  {
         alert("You have not accepted any mission yet");
         return;
     }
 
-    $('#requestInExecution').attr('hidden', false);
+    $('#openRequest').attr('hidden', true);
+    $('#newRequestForm').attr('hidden', true);
+    $('#myRequest').attr('hidden', true);
 
+    $.ajax({
+        url: baseURL + "missions/" + $('#profileMissionToExecute').val(), 
+        error: response => {
+            console.log("ERROR: ", response);
+        },
+        success: (response) => {
+            $('#requestInExecutionDescription').val(response.description);
+            $.ajax({
+                url: baseURL + "quim/" + response.owner, 
+                error: response => {
+                    console.log("ERROR: ", response);
+                },
+                success: (response) => {
+                    $('#inExecutionRequesterName').val(response.name);
+                    $('#inExecutionRequesterContact').val(response.phone);
+                }
+            });
+        }
+    });
+
+    $('#requestInExecution').attr('hidden', false);
 };
